@@ -1,4 +1,5 @@
-﻿using VlearnBackend2.Interfaces;
+﻿using VlearnBackend2.Contexts;
+using VlearnBackend2.Interfaces;
 using VlearnBackend2.Models;
 using VlearnBackend2.Models.Dto;
 
@@ -6,9 +7,18 @@ namespace VlearnBackend2.Services
 {
     public class LoginService : ILoginService
     {
-        public Login CreateLogin(LoginRequestDto Login)
+        private readonly PlataformaContext _context;
+        public LoginService(PlataformaContext context) 
         {
-            throw new NotImplementedException();
+            _context = context;
+        }
+
+        public Login CreateLogin(LoginRequestDto loginDto)
+        {
+            var x = _context.Logins.Add(new Login { email = loginDto.email, senha = loginDto.senha});
+            _context.SaveChanges();
+
+            return x.Entity;
         }
 
         public void DeleteLoginById(int id)
@@ -18,7 +28,7 @@ namespace VlearnBackend2.Services
 
         public IList<Login> GetAllLogin()
         {
-            throw new NotImplementedException();
+            return _context.Logins.ToList();
         }
 
         public Login GetLoginById(int id)

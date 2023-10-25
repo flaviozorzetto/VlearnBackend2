@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using VlearnBackend2.Interfaces;
+using VlearnBackend2.Models.Dto;
 
 namespace VlearnBackend2.Controllers
 {
@@ -10,9 +11,18 @@ namespace VlearnBackend2.Controllers
         {
             _service = service;
         }
+
+        [HttpGet("/login")]
         public IActionResult Index()
         {
-            return Ok("Teste");
+            return Ok(_service.GetAllLogin());
+        }
+
+        [HttpPost("/login")]
+        public IActionResult Add(LoginRequestDto loginRequestDto)
+        {
+            var login = _service.CreateLogin(loginRequestDto);
+            return Ok();
         }
     }
 }

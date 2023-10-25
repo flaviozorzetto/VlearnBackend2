@@ -12,5 +12,10 @@ namespace VlearnBackend2.Contexts
         public DbSet<Telefone> Telefones { get; set; }
 
         public PlataformaContext(DbContextOptions op) : base(op) { }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+        }
     }
 }

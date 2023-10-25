@@ -5,11 +5,11 @@ using VlearnBackend2.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddSingleton<ITelefoneService, TelefoneService>();
-builder.Services.AddSingleton<IAlunoService, AlunoService>();
-builder.Services.AddSingleton<ILoginService, LoginService>();
-builder.Services.AddSingleton<IProfessorService, ProfessorService>();
-builder.Services.AddSingleton<ICursoService, CursoService>();
+builder.Services.AddScoped<ITelefoneService, TelefoneService>();
+builder.Services.AddScoped<IAlunoService, AlunoService>();
+builder.Services.AddScoped<ILoginService, LoginService>();
+builder.Services.AddScoped<IProfessorService, ProfessorService>();
+builder.Services.AddScoped<ICursoService, CursoService>();
 
 var connOptions = builder.Configuration.GetConnectionString("connection"); 
 

@@ -1,4 +1,6 @@
-﻿namespace VlearnBackend2.Models
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace VlearnBackend2.Models
 {
     public class Aluno
     {
