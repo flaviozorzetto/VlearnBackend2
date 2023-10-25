@@ -1,3 +1,4 @@
+using Microsoft.EntityFrameworkCore;
 using VlearnBackend2.Contexts;
 using VlearnBackend2.Interfaces;
 using VlearnBackend2.Services;
@@ -10,7 +11,9 @@ builder.Services.AddSingleton<ILoginService, LoginService>();
 builder.Services.AddSingleton<IProfessorService, ProfessorService>();
 builder.Services.AddSingleton<ICursoService, CursoService>();
 
-builder.Services.AddDbContext<PlataformaContext>();
+var connOptions = builder.Configuration.GetConnectionString("connection"); 
+
+builder.Services.AddDbContext<PlataformaContext>(op => op.UseSqlServer(connOptions));
 
 builder.Services.AddControllers();
 
