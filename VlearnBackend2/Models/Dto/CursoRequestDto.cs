@@ -2,11 +2,11 @@
 {
     public class CursoRequestDto
     {
-        public string? nome { get; set; }
-        public string? descricao { get; set; }
-        public double preco { get; set; }
-        public string? autor { get; set; }
-        public string? duracao { get; set; }
-        public Professor? professor { get; set; }
+        public string? Nome { get; set; }
+        public string? Descricao { get; set; }
+        public double Preco { get; set; }
+        public string? Autor { get; set; }
+        public string? Duracao { get; set; }
+        public Professor? Professor { get; set; }
     }
 }

@@ -6,9 +6,9 @@ namespace VlearnBackend2.Interfaces
     public interface ILoginService
     {
         IList<Login> GetAllLogin();
-        Login GetLoginById(int id);
+        Login? GetLoginById(int id);
         Login CreateLogin(LoginRequestDto Login);
-        Login UpdateLoginById(int id, LoginRequestDto Login);
-        void DeleteLoginById(int id);
+        Login? UpdateLoginById(int id, LoginRequestDto Login);
+        bool DeleteLoginById(int id);
     }
 }

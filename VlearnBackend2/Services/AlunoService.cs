@@ -1,4 +1,6 @@
-﻿using VlearnBackend2.Interfaces;
+﻿using Microsoft.EntityFrameworkCore;
+using VlearnBackend2.Contexts;
+using VlearnBackend2.Interfaces;
 using VlearnBackend2.Models;
 using VlearnBackend2.Models.Dto;
 
@@ -6,24 +8,32 @@ namespace VlearnBackend2.Services
 {
     public class AlunoService : IAlunoService
     {
-        public Aluno CreateAluno(AlunoRequestDto aluno)
+        private readonly PlataformaContext _context;
+        public AlunoService(PlataformaContext context)
         {
-            throw new NotImplementedException();
+            _context = context;
+        }
+        public Aluno CreateAluno(AlunoRequestDto alunoDto)
+        {
+            var x = _context.Alunos.Add(new Aluno { Nome = alunoDto.Nome, TipoPcd = alunoDto.TipoPcd, Login = alunoDto.Login, Telefone = alunoDto.Telefone });
+            _context.SaveChanges();
+
+            return x.Entity;
         }
 
-        public void DeleteAlunoById(int id)
+        public bool DeleteAlunoById(int id)
         {
             throw new NotImplementedException();
         }
 
         public IList<Aluno> GetAllAluno()
         {
-            throw new NotImplementedException();
+            return _context.Alunos.Include(x => x.Login).ToList();
         }
 
-        public Aluno GetAlunoById(int id)
+        public Aluno? GetAlunoById(int id)
         {
-            throw new NotImplementedException();
+            return _context.Alunos.Find(id);
         }
 
         public Aluno UpdateAlunoById(int id, AlunoRequestDto aluno)

@@ -4,12 +4,12 @@ namespace VlearnBackend2.Models
 {
     public class Curso
     {
-        public int id { get; set; }
-        public string? nome { get; set; }
-        public string? descricao { get; set; }
-        public double preco { get; set; }
-        public string? autor { get; set; }
-        public string? duracao { get; set; }
-        public Professor? professor { get; set; }
+        public int Id { get; set; }
+        public string? Nome { get; set; }
+        public string? Descricao { get; set; }
+        public double Preco { get; set; }
+        public string? Autor { get; set; }
+        public string? Duracao { get; set; }
+        public Professor? Professor { get; set; }
     }
 }

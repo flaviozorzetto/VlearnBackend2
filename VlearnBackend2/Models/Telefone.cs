@@ -4,9 +4,9 @@ namespace VlearnBackend2.Models
 {
     public class Telefone
     {
-        public int id { get; set; }
-        public string? ddd { get; set; }
-        public int ddi { get; set; }
-        public string? nr_telefone { get; set; }
+        public int Id { get; set; }
+        public string? Ddd { get; set; }
+        public string? Ddi { get; set; }
+        public string? Nr_telefone { get; set; }
     }
 }

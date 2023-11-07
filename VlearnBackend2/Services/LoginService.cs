@@ -15,15 +15,25 @@ namespace VlearnBackend2.Services
 
         public Login CreateLogin(LoginRequestDto loginDto)
         {
-            var x = _context.Logins.Add(new Login { email = loginDto.email, senha = loginDto.senha});
+            var x = _context.Logins.Add(new Login { Email = loginDto.Email, Senha = loginDto.Senha } );
             _context.SaveChanges();
 
             return x.Entity;
         }
 
-        public void DeleteLoginById(int id)
+        public bool DeleteLoginById(int id)
         {
-            throw new NotImplementedException();
+            var login = GetLoginById(id);
+
+            if (login == null)
+            {
+                return false;
+            }
+
+            _context.Logins.Remove(login);
+            _context.SaveChanges();
+
+            return true;
         }
 
         public IList<Login> GetAllLogin()
@@ -31,14 +41,27 @@ namespace VlearnBackend2.Services
             return _context.Logins.ToList();
         }
 
-        public Login GetLoginById(int id)
+        public Login? GetLoginById(int id)
         {
-            throw new NotImplementedException();
+            return _context.Logins.Find(id);
         }
 
-        public Login UpdateLoginById(int id, LoginRequestDto Login)
+        public Login? UpdateLoginById(int id, LoginRequestDto login)
         {
-            throw new NotImplementedException();
+            var foundLogin = GetLoginById(id);
+
+            if(foundLogin == null)
+            {
+                return null;
+            }
+
+            foundLogin.Senha = login.Senha;
+            foundLogin.Email = login.Email;
+
+            var x = _context.Logins.Update(foundLogin);
+            _context.SaveChanges();
+
+            return x.Entity;
         }
     }
 }

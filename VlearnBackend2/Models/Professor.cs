@@ -4,13 +4,13 @@ namespace VlearnBackend2.Models
 {
     public class Professor
     {
-        public int id { get; set; }
-        public string? nome { get; set; }
-        public string? formacao { get; set; }
-        public string? experiencia { get; set; }
-        public string? idiomas { get; set; }
-        public string? status { get; set; }
-        public Login? login { get; set; }
-        public Telefone? telefone { get; set; }
+        public int Id { get; set; }
+        public string? Nome { get; set; }
+        public string? Formacao { get; set; }
+        public string? Experiencia { get; set; }
+        public string? Idiomas { get; set; }
+        public string? Status { get; set; }
+        public Login? Login { get; set; }
+        public Telefone? Telefone { get; set; }
     }
 }

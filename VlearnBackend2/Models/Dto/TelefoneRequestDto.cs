@@ -1,9 +1,16 @@
-﻿namespace VlearnBackend2.Models.Dto
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace VlearnBackend2.Models.Dto
 {
     public class TelefoneRequestDto
     {
-        public string? ddd { get; set; }
-        public int ddi { get; set; }
-        public string? nr_telefone { get; set; }
+        [Required]
+        public string? Ddd { get; set; }
+
+        [Required]
+        public string? Ddi { get; set; }
+
+        [Required]
+        public string? Nr_telefone { get; set; }
     }
 }

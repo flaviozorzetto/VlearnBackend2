@@ -6,9 +6,9 @@ namespace VlearnBackend2.Interfaces
     public interface IProfessorService
     {
         IList<Professor> GetAllProfessor();
-        Professor GetProfessorById(int id);
+        Professor? GetProfessorById(int id);
         Professor CreateProfessor(ProfessorRequestDto Professor);
-        Professor UpdateProfessorById(int id, ProfessorRequestDto Professor);
-        void DeleteProfessorById(int id);
+        Professor? UpdateProfessorById(int id, ProfessorRequestDto Professor);
+        bool DeleteProfessorById(int id);
     }
 }

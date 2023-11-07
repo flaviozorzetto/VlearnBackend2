@@ -6,9 +6,9 @@ namespace VlearnBackend2.Interfaces
     public interface IAlunoService
     {
         IList<Aluno> GetAllAluno();
-        Aluno GetAlunoById(int id);
+        Aluno? GetAlunoById(int id);
         Aluno CreateAluno(AlunoRequestDto aluno);
-        Aluno UpdateAlunoById(int id, AlunoRequestDto aluno);
-        void DeleteAlunoById(int id);
+        Aluno? UpdateAlunoById(int id, AlunoRequestDto aluno);
+        bool DeleteAlunoById(int id);
     }
 }

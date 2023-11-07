@@ -6,9 +6,9 @@ namespace VlearnBackend2.Interfaces
     public interface ICursoService
     {
         IList<Curso> GetAllCurso();
-        Curso GetCursoById(int id);
+        Curso? GetCursoById(int id);
         Curso CreateCurso(CursoRequestDto Curso);
-        Curso UpdateCursoById(int id, CursoRequestDto Curso);
-        void DeleteCursoById(int id);
+        Curso? UpdateCursoById(int id, CursoRequestDto Curso);
+        bool DeleteCursoById(int id);
     }
 }

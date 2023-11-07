@@ -1,8 +1,13 @@
-﻿namespace VlearnBackend2.Models.Dto
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace VlearnBackend2.Models.Dto
 {
     public class LoginRequestDto
     {
-        public string? email { get; set; }
-        public string? senha { get; set; }
+        [Required]
+        public string? Email { get; set; }
+
+        [Required]
+        public string? Senha { get; set; }
     }
 }

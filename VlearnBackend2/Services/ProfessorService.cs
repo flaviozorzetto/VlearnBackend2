@@ -11,7 +11,7 @@ namespace VlearnBackend2.Services
             throw new NotImplementedException();
         }
 
-        public void DeleteProfessorById(int id)
+        public bool DeleteProfessorById(int id)
         {
             throw new NotImplementedException();
         }
