@@ -17,10 +17,19 @@ var connOptions = builder.Configuration.GetConnectionString("connection");
 builder.Services.AddDbContext<PlataformaContext>(op => op.UseSqlServer(connOptions));
 
 builder.Services.AddControllers();
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
 app.UseRouting();
+
 app.MapControllers();
+
+app.UseSwagger();
+app.UseSwaggerUI(options =>
+{
+    options.SwaggerEndpoint("/swagger/v1/swagger.json", "v1");
+});
 
 app.Run();

@@ -33,12 +33,38 @@ namespace VlearnBackend2.Services
 
         public Aluno? GetAlunoById(int id)
         {
-            return _context.Alunos.Find(id);
+            return _context.Alunos.Include(x => x.Login).Where(x => x.Id == id).FirstOrDefault();
         }
 
-        public Aluno UpdateAlunoById(int id, AlunoRequestDto aluno)
+        public Aluno? UpdateAlunoById(int id, AlunoRequestDto aluno)
         {
-            throw new NotImplementedException();
+            var foundAluno = GetAlunoById(id);
+
+            if (foundAluno == null)
+            {
+                return null;
+            }
+
+            foundAluno.Nome = aluno.Nome;
+            foundAluno.TipoPcd = aluno.TipoPcd;
+            foundAluno.Telefone = aluno.Telefone;
+            if(aluno.Login == null)
+            {
+                foundAluno.Login = null;
+            } else
+            {
+                if (aluno.Login.Id != 0 && foundAluno.Login == null)
+                {
+                    foundAluno.Login = new Login() { Id = aluno.Login.Id };
+                }
+                foundAluno.Login.Email = aluno.Login.Email;
+                foundAluno.Login.Senha = aluno.Login.Senha;
+            }
+
+            var x = _context.Alunos.Update(foundAluno);
+            _context.SaveChanges();
+
+            return x.Entity;
         }
     }
 }
