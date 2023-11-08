@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using VlearnBackend2.Interfaces;
+using VlearnBackend2.Models;
 using VlearnBackend2.Models.Dto;
 
 namespace VlearnBackend2.Controllers
@@ -18,6 +19,7 @@ namespace VlearnBackend2.Controllers
             return Ok(_service.GetAllProfessor());
         }
 
+        [ProducesResponseType(typeof(Professor), 200)]
         [HttpGet("/professor/{id}")]
         public IActionResult FindById(int id)
         {

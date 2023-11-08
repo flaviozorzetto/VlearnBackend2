@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using VlearnBackend2.Interfaces;
+using VlearnBackend2.Models;
 using VlearnBackend2.Models.Dto;
 
 namespace VlearnBackend2.Controllers
@@ -18,6 +19,7 @@ namespace VlearnBackend2.Controllers
             return Ok(_service.GetAllAluno());
         }
 
+        [ProducesResponseType(typeof(Aluno), 200)]
         [HttpGet("/aluno/{id}")]
         public IActionResult FindById(int id)
         {
