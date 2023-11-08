@@ -36,7 +36,7 @@ namespace VlearnBackend2.Services
             return _context.Alunos.Include(x => x.Login).Where(x => x.Id == id).FirstOrDefault();
         }
 
-        public Aluno? UpdateAlunoById(int id, AlunoRequestDto aluno)
+        public Aluno? UpdateAlunoById(int id, AlunoRequestDto alunoRequestDto)
         {
             var foundAluno = GetAlunoById(id);
 
@@ -45,20 +45,20 @@ namespace VlearnBackend2.Services
                 return null;
             }
 
-            foundAluno.Nome = aluno.Nome;
-            foundAluno.TipoPcd = aluno.TipoPcd;
-            foundAluno.Telefone = aluno.Telefone;
-            if(aluno.Login == null)
+            foundAluno.Nome = alunoRequestDto.Nome;
+            foundAluno.TipoPcd = alunoRequestDto.TipoPcd;
+            foundAluno.Telefone = alunoRequestDto.Telefone;
+            if(alunoRequestDto.Login == null)
             {
                 foundAluno.Login = null;
             } else
             {
-                if (aluno.Login.Id != 0 && foundAluno.Login == null)
+                if (alunoRequestDto.Login.Id != 0 && foundAluno.Login == null)
                 {
-                    foundAluno.Login = new Login() { Id = aluno.Login.Id };
+                    foundAluno.Login = new Login() { Id = alunoRequestDto.Login.Id };
                 }
-                foundAluno.Login.Email = aluno.Login.Email;
-                foundAluno.Login.Senha = aluno.Login.Senha;
+                foundAluno.Login.Email = alunoRequestDto.Login.Email;
+                foundAluno.Login.Senha = alunoRequestDto.Login.Senha;
             }
 
             var x = _context.Alunos.Update(foundAluno);
