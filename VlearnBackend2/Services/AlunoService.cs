@@ -23,7 +23,17 @@ namespace VlearnBackend2.Services
 
         public bool DeleteAlunoById(int id)
         {
-            throw new NotImplementedException();
+            var aluno = GetAlunoById(id);
+
+            if (aluno == null)
+            {
+                return false;
+            }
+
+            _context.Alunos.Remove(aluno);
+            _context.SaveChanges();
+
+            return true;
         }
 
         public IList<Aluno> GetAllAluno()
@@ -48,17 +58,42 @@ namespace VlearnBackend2.Services
             foundAluno.Nome = alunoRequestDto.Nome;
             foundAluno.TipoPcd = alunoRequestDto.TipoPcd;
             foundAluno.Telefone = alunoRequestDto.Telefone;
+
+            if(alunoRequestDto.Telefone == null)
+            {
+                foundAluno.Telefone = null;
+            } else
+            {
+
+            }
+
             if(alunoRequestDto.Login == null)
             {
                 foundAluno.Login = null;
-            } else
+            } 
+            else
             {
-                if (alunoRequestDto.Login.Id != 0 && foundAluno.Login == null)
+                if (foundAluno.Login == null)
                 {
-                    foundAluno.Login = new Login() { Id = alunoRequestDto.Login.Id };
+                    var login = _context.Logins.Where(x => x.Id == alunoRequestDto.Login.Id).FirstOrDefault();
+
+                    if(login != null)
+                    {
+                        foundAluno.Login = login;
+                    } 
+                    else
+                    {
+                        var createdLogin = 
+                            _context.Logins.Add(new () { Email = alunoRequestDto.Login.Email, Senha = alunoRequestDto.Login.Senha}).Entity;
+                        
+                        foundAluno.Login = createdLogin;
+                    }
+                } else
+                {
+                    foundAluno.Login.Email = alunoRequestDto.Login.Email;
+                    foundAluno.Login.Senha = alunoRequestDto.Login.Senha;
                 }
-                foundAluno.Login.Email = alunoRequestDto.Login.Email;
-                foundAluno.Login.Senha = alunoRequestDto.Login.Senha;
+                
             }
 
             var x = _context.Alunos.Update(foundAluno);
