@@ -49,12 +49,20 @@ namespace VlearnBackend2.Controllers
         [HttpDelete("/login/{id}")]
         public IActionResult Delete(int id)
         {
-            bool deleted = _service.DeleteLoginById(id);
-
-            if(!deleted)
+            try
             {
-                return NotFound("Login não encontrado");
+                bool deleted = _service.DeleteLoginById(id);
+
+                if(!deleted)
+                {
+                    return NotFound("Login não encontrado");
+                }
+
+            } catch (Exception ex) 
+            {
+               return BadRequest( new { Message = ex.Message, InnerMessage = ex.InnerException?.Message } );
             }
+
 
             return NoContent();
         }

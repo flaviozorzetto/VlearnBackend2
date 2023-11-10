@@ -49,11 +49,19 @@ namespace VlearnBackend2.Controllers
         [HttpDelete("/telefone/{id}")]
         public IActionResult Delete(int id)
         {
-            bool deleted = _service.DeleteTelefoneById(id);
-
-            if (!deleted)
+            try
             {
-                return NotFound("Telefone não encontrado");
+                bool deleted = _service.DeleteTelefoneById(id);
+
+                if (!deleted)
+                {
+                    return NotFound("Telefone não encontrado");
+                }
+
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { Message = ex.Message, InnerMessage = ex.InnerException?.Message });
             }
 
             return NoContent();

@@ -9,7 +9,8 @@ namespace VlearnBackend2.Controllers
     public class AlunoController : Controller, IController<AlunoRequestDto>
     {
         private readonly IAlunoService _service;
-        public AlunoController(IAlunoService service) {
+        public AlunoController(IAlunoService service)
+        {
             _service = service;
         }
 
@@ -49,11 +50,19 @@ namespace VlearnBackend2.Controllers
         [HttpDelete("/aluno/{id}")]
         public IActionResult Delete(int id)
         {
-            bool deleted = _service.DeleteAlunoById(id);
-
-            if (!deleted)
+            try
             {
-                return NotFound("Aluno não encontrado");
+                bool deleted = _service.DeleteAlunoById(id);
+
+                if (!deleted)
+                {
+                    return NotFound("Aluno não encontrado");
+                }
+
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { Message = ex.Message, InnerMessage = ex.InnerException?.Message });
             }
 
             return NoContent();

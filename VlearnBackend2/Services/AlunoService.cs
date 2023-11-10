@@ -31,6 +31,7 @@ namespace VlearnBackend2.Services
             }
 
             _context.Alunos.Remove(aluno);
+
             _context.SaveChanges();
 
             return true;
@@ -38,12 +39,12 @@ namespace VlearnBackend2.Services
 
         public IList<Aluno> GetAllAluno()
         {
-            return _context.Alunos.Include(x => x.Login).ToList();
+            return _context.Alunos.Include(x => x.Login).Include(x => x.Telefone).ToList();
         }
 
         public Aluno? GetAlunoById(int id)
         {
-            return _context.Alunos.Include(x => x.Login).Where(x => x.Id == id).FirstOrDefault();
+            return _context.Alunos.Include(x => x.Login).Include(x => x.Telefone).Where(x => x.Id == id).FirstOrDefault();
         }
 
         public Aluno? UpdateAlunoById(int id, AlunoRequestDto alunoRequestDto)
@@ -57,14 +58,37 @@ namespace VlearnBackend2.Services
 
             foundAluno.Nome = alunoRequestDto.Nome;
             foundAluno.TipoPcd = alunoRequestDto.TipoPcd;
-            foundAluno.Telefone = alunoRequestDto.Telefone;
 
             if(alunoRequestDto.Telefone == null)
             {
                 foundAluno.Telefone = null;
             } else
             {
+                if(foundAluno.Telefone == null)
+                {
+                    var telefone = _context.Telefones.Where(x => x.Id == alunoRequestDto.Telefone.Id).FirstOrDefault();
 
+                    if(telefone != null)
+                    {
+                        foundAluno.Telefone = telefone;
+                    } else
+                    {
+                        var createdTelefone = _context.Telefones.Add(new Telefone () 
+                        { 
+                            Nr_telefone = alunoRequestDto.Telefone.Nr_telefone,
+                            Ddd = alunoRequestDto.Telefone.Ddd,
+                            Ddi = alunoRequestDto.Telefone.Ddi
+                        }).Entity;
+
+                        foundAluno.Telefone = createdTelefone;
+                    }
+
+                } else
+                {
+                    foundAluno.Telefone.Nr_telefone = alunoRequestDto.Telefone.Nr_telefone;
+                    foundAluno.Telefone.Ddd = alunoRequestDto.Telefone.Ddd;
+                    foundAluno.Telefone.Ddi = alunoRequestDto.Telefone.Ddi;
+                }
             }
 
             if(alunoRequestDto.Login == null)

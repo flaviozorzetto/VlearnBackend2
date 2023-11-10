@@ -8,14 +8,14 @@ namespace VlearnBackend2.Services
     public class LoginService : ILoginService
     {
         private readonly PlataformaContext _context;
-        public LoginService(PlataformaContext context) 
+        public LoginService(PlataformaContext context)
         {
             _context = context;
         }
 
         public Login CreateLogin(LoginRequestDto loginDto)
         {
-            var x = _context.Logins.Add(new Login { Email = loginDto.Email, Senha = loginDto.Senha } );
+            var x = _context.Logins.Add(new Login { Email = loginDto.Email, Senha = loginDto.Senha });
             _context.SaveChanges();
 
             return x.Entity;
@@ -50,7 +50,7 @@ namespace VlearnBackend2.Services
         {
             var foundLogin = GetLoginById(id);
 
-            if(foundLogin == null)
+            if (foundLogin == null)
             {
                 return null;
             }
