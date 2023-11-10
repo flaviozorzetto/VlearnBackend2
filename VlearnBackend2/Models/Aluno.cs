@@ -3,6 +3,7 @@ using System.Text.Json.Serialization;
 
 namespace VlearnBackend2.Models
 {
+    [Table("TABLE_VLEARN_ALUNO")]
     public class Aluno
     {
         public int Id { get; set; }

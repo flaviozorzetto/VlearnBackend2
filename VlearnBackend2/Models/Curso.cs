@@ -1,7 +1,9 @@
-﻿using System.Runtime.InteropServices;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using System.Runtime.InteropServices;
 
 namespace VlearnBackend2.Models
 {
+    [Table("TABLE_VLEARN_CURSO")]
     public class Curso
     {
         public int Id { get; set; }

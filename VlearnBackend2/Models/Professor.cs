@@ -1,7 +1,8 @@
-﻿using System.Runtime.InteropServices;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 
 namespace VlearnBackend2.Models
 {
+    [Table("TABLE_VLEARN_PROFESSOR")]
     public class Professor
     {
         public int Id { get; set; }

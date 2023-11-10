@@ -1,7 +1,8 @@
-﻿using System.Runtime.InteropServices;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 
 namespace VlearnBackend2.Models
 {
+    [Table("TABLE_VLEARN_TELEFONE")]
     public class Telefone
     {
         public int Id { get; set; }
