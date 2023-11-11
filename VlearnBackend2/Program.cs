@@ -14,7 +14,7 @@ builder.Services.AddScoped<ICursoService, CursoService>();
 
 var connOptions = builder.Configuration.GetConnectionString("connection"); 
 
-builder.Services.AddDbContext<PlataformaContext>(op => op.UseSqlServer(connOptions));
+builder.Services.AddDbContext<PlataformaContext>(op => op.UseOracle(connOptions));
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
