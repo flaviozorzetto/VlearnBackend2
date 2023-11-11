@@ -8,15 +8,28 @@ namespace VlearnBackend2.Controllers
     public class LoginController : Controller, IController<LoginRequestDto>
     {
         private readonly ILoginService _service;
-        public LoginController(ILoginService service)
+        private readonly ILogger<LoginController> _logger;
+        public LoginController(ILoginService service, ILogger<LoginController> logger)
         {
+            _logger = logger;
             _service = service;
         }
 
         [HttpGet("/login")]
         public IActionResult Index()
         {
-            return Ok(_service.GetAllLogin());
+            _logger.LogInformation("Getting all alunos");
+
+            try
+            {
+                var logins = _service.GetAllLogin();
+
+                return Ok(logins);
+            } catch (Exception ex)
+            {
+                _logger.LogError(ex.Message);
+                return BadRequest("Not possible to fetch alunos");
+            }
         }
 
         [ProducesResponseType(typeof(Login), 200)]

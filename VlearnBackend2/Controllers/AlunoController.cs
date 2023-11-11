@@ -9,14 +9,17 @@ namespace VlearnBackend2.Controllers
     public class AlunoController : Controller, IController<AlunoRequestDto>
     {
         private readonly IAlunoService _service;
-        public AlunoController(IAlunoService service)
+        private readonly ILogger<AlunoController> _logger;
+        public AlunoController(IAlunoService service, ILogger<AlunoController> logger)
         {
             _service = service;
+            _logger = logger;
         }
 
         [HttpGet("/aluno")]
         public IActionResult Index()
         {
+            _logger.LogInformation("Getting all alunos");
             return Ok(_service.GetAllAluno());
         }
 

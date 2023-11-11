@@ -27,6 +27,8 @@ builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
+app.Logger.LogInformation("Started application with current connOptions: "  + connOptions);
+
 app.UseRouting();
 
 app.MapControllers();

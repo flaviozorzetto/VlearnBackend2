@@ -8,9 +8,11 @@ namespace VlearnBackend2.Services
     public class LoginService : ILoginService
     {
         private readonly PlataformaContext _context;
-        public LoginService(PlataformaContext context)
+        private readonly ILogger<LoginService> _logger;
+        public LoginService(PlataformaContext context, ILogger<LoginService> logger)
         {
             _context = context;
+            _logger = logger;
         }
 
         public Login CreateLogin(LoginRequestDto loginDto)
@@ -38,6 +40,7 @@ namespace VlearnBackend2.Services
 
         public IList<Login> GetAllLogin()
         {
+            _logger.LogInformation("Getting all logins");
             return _context.Logins.ToList();
         }
 
