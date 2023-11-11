@@ -1,4 +1,3 @@
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using VlearnBackend2.Contexts;
 using VlearnBackend2.Interfaces;
@@ -12,9 +11,15 @@ builder.Services.AddScoped<ILoginService, LoginService>();
 builder.Services.AddScoped<IProfessorService, ProfessorService>();
 builder.Services.AddScoped<ICursoService, CursoService>();
 
-var connOptions = builder.Configuration.GetConnectionString("connection"); 
+var connOptions = builder.Configuration.GetConnectionString("connection");
 
-builder.Services.AddDbContext<PlataformaContext>(op => op.UseOracle(connOptions));
+if(builder.Environment.IsDevelopment())
+{
+    builder.Services.AddDbContext<PlataformaContext>(op => op.UseSqlServer(connOptions));
+} else if (builder.Environment.IsProduction())
+{
+    builder.Services.AddDbContext<PlataformaContext>(op => op.UseOracle(connOptions));
+}
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
